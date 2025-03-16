@@ -7,10 +7,13 @@ export default function Home() {
       <Header />
       <p>This is our homepage</p>
       <div>
-        <a href="/blog">Blog</a>
+        <a href="/dashboard/team-slug">Dashboard team page</a>
       </div>
       <div>
-        <Link href="/about">About us</Link>
+        <a href="/dashboard/catalog">Catalog page from dashboard app</a>
+      </div>
+      <div>
+        <Link href="/about">About page in marketing app</Link>
       </div>
     </div>
   );

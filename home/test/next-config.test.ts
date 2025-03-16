@@ -4,7 +4,7 @@
  */
 
 import { type MatchResult, compile, match } from "path-to-regexp";
-import nextConfig from "../next.config.js";
+import nextConfig from "../next.config";
 
 function getDestination(destination: string, pathMatch: MatchResult): string {
   const hasDifferentHost = destination.startsWith("https://");
@@ -20,14 +20,14 @@ function getDestination(destination: string, pathMatch: MatchResult): string {
   })(pathMatch.params);
 }
 
-const BLOG_URL = "https://with-zones-blog.vercel.app";
+const DASHBOARD_URL = "https://with-zones-dashboard.vercel.app";
 
 describe("next.config.js test", () => {
   describe("rewrites", () => {
     let rewrites: Awaited<ReturnType<NonNullable<typeof nextConfig.rewrites>>>;
 
     beforeAll(async () => {
-      process.env.BLOG_URL = BLOG_URL;
+      process.env.DASHBOARD_URL = DASHBOARD_URL;
       rewrites = await nextConfig.rewrites!();
     });
 
@@ -48,23 +48,27 @@ describe("next.config.js test", () => {
       return undefined;
     }
 
-    it("non blog pages are not rewritten", () => {
+    it("non dashboard pages are not rewritten", () => {
       expect(getRewrittenUrl("/")).toEqual(undefined);
-      expect(getRewrittenUrl("/blog-not")).toEqual(undefined);
-      expect(getRewrittenUrl("/blog2")).toEqual(undefined);
+      expect(getRewrittenUrl("/dashboard-not")).toEqual(undefined);
+      expect(getRewrittenUrl("/dashboard2")).toEqual(undefined);
     });
 
-    it("/blog is rewritten to child zone", () => {
-      expect(getRewrittenUrl("/blog")).toEqual(`${BLOG_URL}/blog`);
-      expect(getRewrittenUrl("/blog/post/1")).toEqual(
-        `${BLOG_URL}/blog/post/1`,
+    it("/dashboard is rewritten to child zone", () => {
+      expect(getRewrittenUrl("/dashboard")).toEqual(
+        `${DASHBOARD_URL}/dashboard`
+      );
+      expect(getRewrittenUrl("/dashboard/post/1")).toEqual(
+        `${DASHBOARD_URL}/dashboard/post/1`
       );
     });
 
-    it("/blog static resources are rewritten to child zone", () => {
+    it("/dashboard static resources are rewritten to child zone", () => {
       expect(
-        getRewrittenUrl("/blog-static/_next/static/chunks/chunk.css"),
-      ).toEqual(`${BLOG_URL}/blog-static/_next/static/chunks/chunk.css`);
+        getRewrittenUrl("/dashboard-static/_next/static/chunks/chunk.css")
+      ).toEqual(
+        `${DASHBOARD_URL}/dashboard-static/_next/static/chunks/chunk.css`
+      );
     });
   });
 });
