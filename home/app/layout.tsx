@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Next.js - Home Zone",
   description: "Next.js example for Multi Zones",
@@ -10,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <p>Home layout</p>
+        {children}
+      </body>
     </html>
   );
 }

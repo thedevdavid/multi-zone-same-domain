@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <div>
-      <h2>The Company</h2>
+      <h2>Marketing header</h2>
     </div>
   );
 }

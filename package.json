@@ -1,3 +1,15 @@
 {
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev:home": "cd ./home && bun run dev",
+    "dev:dashboard": "cd ./dashboard && bun run dev",
+    "dev": "concurrently \"bun run dev:home\" \"bun run dev:dashboard\""
+  },
+  "dependencies": {
+    "concurrently": "9.1.2"
+  },
+  "workspaces": [
+    "home",
+    "dashboard"
+  ]
 }

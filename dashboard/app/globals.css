@@ -1,0 +1,14 @@
+p, h1, h2, h3, h4, h5, h6, a{
+  color: red;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  margin: 4px auto;
+  max-width: 600px;
+}
